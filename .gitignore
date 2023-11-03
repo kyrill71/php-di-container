@@ -1,0 +1,6 @@
+/src/testfiles
+composer.lock
+di.json
+index.php
+.php-cs-fixer.cache
+/vendor

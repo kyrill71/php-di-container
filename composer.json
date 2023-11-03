@@ -1,0 +1,20 @@
+{
+    "name": "kyrill/php-di-container",
+    "description": "A php dependency injection container",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Kyrill\\PhpDiContainer\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kyrill van Fessem",
+            "email": "kyrill.van.fessem@maxserv.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "dev-master"
+    }
+}
