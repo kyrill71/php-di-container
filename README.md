@@ -6,7 +6,7 @@ This is a simple automatic dependency injection container in PHP.
 ## Basic setup
 To install this package, run the following command in the root of your project:
 ```
-composer require kyrill/php-di-container:dev-main
+composer require kyrill/php-di-container
 ```
 ## Usage
 ### Create a container
