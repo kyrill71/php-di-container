@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Kyrill\PhpDiContainer;
 
-class ClassRegistar
+class ClassRegister
 {
 
     public function registerFile(string $path, FileReaderInterface $fileReader, Container $container): void{
