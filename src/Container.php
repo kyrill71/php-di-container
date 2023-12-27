@@ -29,6 +29,7 @@ class Container
         }
         return $dependencies;
     }
+
     /**
      * @param string $name
      * @return object
@@ -44,7 +45,7 @@ class Container
     public function register(string $name, object $classObject): void
     {
         if ($classObject->getClass() === null && !class_exists($name) && !interface_exists($name) && !isset($this->registry[$name])) {
-          throw new ClassHasNotBeenRegistratedException('Class name is not set in the json file or register method');
+            throw new ClassHasNotBeenRegistratedException('Class name is not set in the json file or register method');
         }
         if ($classObject->getArguments() !== null) {
             $this->registry[$name]['arguments'] = $classObject->getArguments();
@@ -80,23 +81,24 @@ class Container
         $classDependencies = [];
 
         foreach ($dependencies as $dependency) {
-        if (!class_exists($dependency) && !interface_exists($dependency) && !isset($this->registry[$name])) {
-            throw new ClassDoesNotExistException("Class $dependency does not exist");
+            if (!class_exists($dependency) && !interface_exists($dependency) && !isset($this->registry[$name])) {
+                throw new ClassDoesNotExistException("Class $dependency does not exist");
+            }
+            if (!class_exists($dependency) && !interface_exists($dependency) && isset($this->registry[$name])) {
+                $classDependencies[] = $dependency;
+            } else {
+                $classDependencies[] = $this->resolve($dependency);
+            }
         }
-        if (!class_exists($dependency) && !interface_exists($dependency) && isset($this->registry[$name])) {
-            $classDependencies[] = $dependency;
-        } else {
-            $classDependencies[] = $this->resolve($dependency);
-        }
-    }
         return $classDependencies;
     }
+
     private function assignDependenciesIfSet(array $dependencies, string $name): array
     {
         $className = null;
         $extractedDependencies = $dependencies;
 
-        if ($dependencies['class'] !== null || $dependencies['arguments'] !== null) {
+        if (isset($dependencies['class']) || isset($dependencies['arguments'])) {
             if (isset($this->registry[$name])) {
                 $className = $dependencies['class'] ?? null;
                 $extractedDependencies = $dependencies['arguments'] ?? $dependencies;
