@@ -18,11 +18,12 @@ $container = new Container();
 ```
 ### Register a class
 #### Register a class with a function
-You can register a class with a function.
+You can register a class with a function. First give the clas an unique name, then put the class: "class definition" in the function in the class definitions gave it the namespace of the class and the arguments. after that define if the class is a singleton or not. If you don't want to use arguments you can leave the array empty.
 ```php
 <?php
-$container->register(Classname::class, [arguments]);
+$container->register('name', new ClassDefinition('namespace\\classname/', ['argument1', 'argument2'], true));
 ```
+
 #### Register classes by a file
 You can make a json file with the following structure, to register the classes, aliases or interfaces:
 ```json
@@ -50,8 +51,8 @@ You can use aliases to register classes or interfaces. Aliases are useful if you
 To register the file you need to make a `FileReader` class. This class needs to implement the `FileReaderInterface`. You can register the file by using the `registerFile` function. By default there is a `JsonFileReader` class. This class reads a json file and registers the classes or interfaces. But you can make your own `FileReader` class.
 ```php
 <?php
-$classRegistar = new ClassRegistar();
-$classRegistar->registerFile('.\di.json', new JsonFileReader(), $container);
+$classRegister = new ClassRegistar();
+$classRegister->registerFile('.\di.json', new JsonFileReader(), $container);
 ```
 ### Get a class
 You can get a class by using the `resolve` function. If want to get an alias you just put the aliasname with quotes like this: 'aliasname' in the function.

@@ -53,6 +53,9 @@ class Container
         if ($classObject->getClass() !== null) {
             $this->registry[$name]['class'] = $classObject->getClass();
         }
+        if ($classObject->isSingleton() !== null) {
+            $this->registry[$name]['isSingleton'] = $classObject->isSingleton();
+        }
     }
 
     /**
@@ -72,6 +75,13 @@ class Container
             if (isset($this->registry[$className]) && !class_exists($className)) {
                 $name = $this->registry[$className]['class'];
             }
+        }
+        if (isset($this->registry[$name]['isSingleton']) && $this->registry[$name]['isSingleton'] === true) {
+            if (isset($this->registry[$name]['object'])) {
+                return $this->registry[$name]['object'];
+            }
+            $this->registry[$name]['object'] = new $name(...$classDependencies);
+            return $this->registry[$name]['object'];
         }
         return new $name(...$classDependencies);
     }

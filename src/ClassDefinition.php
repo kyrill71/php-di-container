@@ -5,19 +5,11 @@ namespace Kyrill\PhpDiContainer;
 
 class ClassDefinition
 {
-    private string $name;
-    private array $arguments;
-    private string $class;
-    public function __construct(array $arguments, string $class)
+
+    public function __construct(private array $arguments, private string $class, private bool $isSingleton = false)
     {
-        $this->arguments = $arguments;
-        $this->class = $class;
     }
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
     public function getArguments(): array
     {
         return $this->arguments;
@@ -27,9 +19,8 @@ class ClassDefinition
     {
         return $this->class;
     }
-
-    public function isCached(): bool
+    public function isSingleton(): bool
     {
-        return $this->cached;
+        return $this->isSingleton;
     }
 }
