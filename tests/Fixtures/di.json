@@ -1,0 +1,7 @@
+{
+  "services": {
+    "Tests\\Fixtures\\TestService2": {
+      "class": "Tests\\Fixtures\\TestService"
+    }
+  }
+}

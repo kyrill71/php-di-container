@@ -1,7 +1,7 @@
 /src/testfiles
 composer.lock
-di.json
 index.php
 .php-cs-fixer.cache
+.phpunit.result.cache
 /vendor
 .idea
