@@ -13,6 +13,9 @@ class Container
 {
     private array $registry = [];
 
+    /**
+     * @throws ReflectionException
+     */
     private function getArguments($name): array
     {
         $dependencies = [];
@@ -31,10 +34,7 @@ class Container
     }
 
     /**
-     * @param string $name
-     * @return object
-     * @throws ClassDoesNotExistException
-     * @throws ReflectionException
+     * @throws ClassDoesNotExistException|ReflectionException
      */
     public function resolve(string $name): object
     {
@@ -42,6 +42,9 @@ class Container
         return $this->build($name, $dependencies);
     }
 
+    /**
+     * @throws ClassHasNotBeenRegisteredException
+     */
     public function register(string $name, object $classObject): void
     {
         if ($classObject->getClass() === null && !class_exists($name) && !interface_exists($name) && !isset($this->registry[$name])) {
@@ -59,10 +62,7 @@ class Container
     }
 
     /**
-     * @param string $name
-     * @param array $dependencies
-     * @return mixed
-     * @throws ClassDoesNotExistException
+     * @throws ClassDoesNotExistException|ReflectionException
      */
     private function build(string $name, array $dependencies): object
     {
@@ -86,6 +86,9 @@ class Container
         return new $name(...$classDependencies);
     }
 
+    /**
+     * @throws ClassDoesNotExistException|ReflectionException
+     */
     private function resolveArguments(string $name, array $dependencies): array
     {
         $classDependencies = [];
