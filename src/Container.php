@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kyrill\PhpDiContainer;
 
 use Kyrill\PhpDiContainer\Exception\ClassDoesNotExistException;
-use Kyrill\PhpDiContainer\Exception\ClassHasNotBeenRegistratedException;
+use Kyrill\PhpDiContainer\Exception\ClassHasNotBeenRegisteredException;
 use ReflectionClass;
 use ReflectionException;
 
@@ -45,7 +45,7 @@ class Container
     public function register(string $name, object $classObject): void
     {
         if ($classObject->getClass() === null && !class_exists($name) && !interface_exists($name) && !isset($this->registry[$name])) {
-            throw new ClassHasNotBeenRegistratedException('Class name is not set in the json file or register method');
+            throw new ClassHasNotBeenRegisteredException('Class name is not set in the json file or register method');
         }
         if ($classObject->getArguments() !== null) {
             $this->registry[$name]['arguments'] = $classObject->getArguments();
