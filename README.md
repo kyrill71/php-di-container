@@ -1,11 +1,9 @@
 # php-di-container
-Dependency injection container in PHP
+A simple automatic dependency injection container implemented in PHP.
 
-This is a simple automatic dependency injection container in PHP.
-
-## Basic setup
-To install this package, run the following command in the root of your project:
-```
+## Installation
+To install this package, run the following command in your project root:
+```bash
 composer require Kyrill\PhpDiContainer
 ```
 ## Usage
@@ -21,21 +19,18 @@ $container = new Container();
 
 ### Register a class
 
-You don't need to register a class. All classes would be automatically resolved unless there is an argument in the
-constructor that isn't a class.
+You don’t have to register classes manually. All classes will be automatically resolved unless the constructor has an argument that is not a class.
 
 #### Register a class with a function
 
-You can register a class with a function. First give the clas a unique name, then put the class: "class definition" in
-the function in the class definitions gave it the namespace of the class and the arguments. after that define if the
-class is a singleton or not. By default, a class is not a singleton. If you don't want to use arguments you can leave the array empty.
+You can register a class with a function by assigning it a unique name and providing a 'ClassDefinition' with constructor arguments, the class namespace, and whether it should be treated as a singleton (default is false). If no arguments are needed, you can pass an empty array.
 ```php
 $container->register('name', new ClassDefinition(['argument1', 'argument2'], 'namespace\\classname/', true));
 ```
 
 #### Register classes by a file
 
-You can make a json file with the following structure, to register the classes, aliases or interfaces:
+You can create a JSON file with the following structure to register classes, aliases, or interfaces:
 ```json
 {
   "services": {
